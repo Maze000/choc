@@ -1,11 +1,9 @@
-import React, { useCallback, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
+import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import productBonbonVanilla from "@/assets/product-bonbon-vanilla.jpg";
 import productTruffles from "@/assets/product-truffles.jpg";
@@ -14,30 +12,23 @@ import productIrishCream from "@/assets/product-irish-cream.jpg";
 import productDesignShapes from "@/assets/product-design-shapes.jpg";
 
 const ChocolateCarousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: true,
-    align: 'start',
-    containScroll: 'trimSnaps',
-    dragFree: true,
-    skipSnaps: false
-  });
-  
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState<typeof chocolateImages[0] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % chocolateImages.length);
+  };
 
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
-  
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + chocolateImages.length) % chocolateImages.length);
+  };
+
   const handleImageClick = (chocolate: typeof chocolateImages[0]) => {
     setSelectedImage(chocolate);
     setIsModalOpen(true);
   };
-  
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
@@ -79,75 +70,87 @@ const ChocolateCarousel = () => {
   return (
     <>
       <div className="relative">
-        <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          {chocolateImages.map((chocolate) => (
-            <div key={chocolate.id} className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-2 sm:px-4">
-              <div 
-                className="relative group cursor-pointer"
-                onClick={() => handleImageClick(chocolate)}
-              >
-                <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
-                  <img
-                    src={chocolate.image}
-                    alt={chocolate.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-end">
-                  <div className="p-4 text-white">
-                    <h3 className="font-playfair text-lg font-semibold mb-1">
-                      {chocolate.title}
-                    </h3>
-                    <p className="text-sm text-gray-200">
-                      {chocolate.description}
-                    </p>
+        {/* Carousel Container */}
+        <div className="overflow-hidden rounded-lg">
+          <div 
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {chocolateImages.map((chocolate) => (
+              <div key={chocolate.id} className="w-full flex-shrink-0 px-2 sm:px-4">
+                <div 
+                  className="relative group cursor-pointer"
+                  onClick={() => handleImageClick(chocolate)}
+                >
+                  <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
+                    <img
+                      src={chocolate.image}
+                      alt={chocolate.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                   </div>
-                </div>
-                {/* Click indicator */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                    </svg>
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-end">
+                    <div className="p-4 text-white">
+                      <h3 className="font-playfair text-lg font-semibold mb-1">
+                        {chocolate.title}
+                      </h3>
+                      <p className="text-sm text-gray-200">
+                        {chocolate.description}
+                      </p>
+                    </div>
+                  </div>
+                  {/* Click indicator */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Navigation buttons - Hidden on mobile, visible on larger screens */}
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-amber-800 hover:bg-amber-700 text-white border-amber-800 hover:border-amber-700 shadow-lg z-10 hidden sm:flex"
-        onClick={scrollPrev}
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
-      
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-amber-800 hover:bg-amber-700 text-white border-amber-800 hover:border-amber-700 shadow-lg z-10 hidden sm:flex"
-        onClick={scrollNext}
-      >
-        <ChevronRight className="h-4 w-4" />
-      </Button>
-      
-      {/* Mobile swipe indicator */}
-      <div className="flex justify-center mt-4 sm:hidden">
-        <div className="text-xs text-muted-foreground flex items-center gap-2">
-          <span>Desliza para ver más</span>
-          <div className="flex gap-1">
-            <div className="w-2 h-2 bg-amber-800 rounded-full animate-pulse"></div>
-            <div className="w-2 h-2 bg-amber-600 rounded-full animate-pulse delay-200"></div>
-            <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse delay-500"></div>
+            ))}
           </div>
         </div>
-      </div>
+        
+        {/* Navigation buttons - Hidden on mobile, visible on larger screens */}
+        <Button
+          variant="outline"
+          size="icon"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-amber-800 hover:bg-amber-700 text-white border-amber-800 hover:border-amber-700 shadow-lg z-10 hidden sm:flex"
+          onClick={prevSlide}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+        
+        <Button
+          variant="outline"
+          size="icon"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-amber-800 hover:bg-amber-700 text-white border-amber-800 hover:border-amber-700 shadow-lg z-10 hidden sm:flex"
+          onClick={nextSlide}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+        
+        {/* Dots indicator */}
+        <div className="flex justify-center mt-4 gap-2">
+          {chocolateImages.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full transition-colors ${
+                index === currentIndex ? 'bg-amber-800' : 'bg-amber-300'
+              }`}
+              onClick={() => setCurrentIndex(index)}
+            />
+          ))}
+        </div>
+        
+        {/* Mobile swipe indicator */}
+        <div className="flex justify-center mt-2 sm:hidden">
+          <div className="text-xs text-muted-foreground">
+            Toca los puntos para navegar
+          </div>
+        </div>
       </div>
       
       {/* Image Modal */}
