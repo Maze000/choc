@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
 
         <div className="text-center text-sm opacity-90 space-y-2">
-          <p>© 2025, Castillo Chocolates NZ Powered by Shopify</p>
+          <p>© 2025, Castillo Chocolates NZ Powered by Ai Ware Studio</p>
           <div className="space-x-4">
             <a href="#" className="hover:opacity-75 transition-opacity">
               Privacy Policy
