@@ -1,5 +1,7 @@
+import React, { useState } from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import PurchaseModal from './PurchaseModal';
 
 interface ProductCardProps {
   id: string;
@@ -13,6 +15,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ 
+  id,
   image, 
   title, 
   price, 
@@ -21,6 +24,22 @@ const ProductCard = ({
   soldOut = false, 
   isNew = false 
 }: ProductCardProps) => {
+  const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
+  
+  const handleAddToCart = () => {
+    setIsPurchaseModalOpen(true);
+  };
+  
+  const product = {
+    id,
+    image,
+    title,
+    price,
+    originalPrice,
+    fromPrice,
+    soldOut,
+    isNew
+  };
   return (
     <div className="bg-card rounded-lg shadow-card hover:shadow-hover transition-all duration-300 overflow-hidden group">
       <div className="relative aspect-square overflow-hidden">
@@ -70,10 +89,17 @@ const ProductCard = ({
             : "w-full bg-gradient-chocolate hover:shadow-hover transition-all duration-300"
           }
           disabled={soldOut}
+          onClick={handleAddToCart}
         >
           {soldOut ? "Notify when available" : "Add to Cart"}
         </Button>
       </div>
+      
+      <PurchaseModal
+        isOpen={isPurchaseModalOpen}
+        onClose={() => setIsPurchaseModalOpen(false)}
+        product={product}
+      />
     </div>
   );
 };

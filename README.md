@@ -1,22 +1,16 @@
-# Welcome to your Lovable project
+# Castillo Chocolates NZ
+
+A premium chocolate e-commerce website showcasing artisan Belgian chocolates and bonbons from New Zealand.
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/2609e322-4b20-41bf-a7e7-ab32c08d40c1
+This is a modern React-based web application built with TypeScript, Vite, Tailwind CSS, and shadcn/ui components.
 
-## How can I edit this code?
+## How to run this project
 
-There are several ways of editing your application.
+**Local Development**
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/2609e322-4b20-41bf-a7e7-ab32c08d40c1) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+To run this project locally, follow these steps:
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -60,14 +54,19 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Features
 
-Simply open [Lovable](https://lovable.dev/projects/2609e322-4b20-41bf-a7e7-ab32c08d40c1) and click on Share -> Publish.
+- Interactive chocolate carousel with image zoom functionality
+- Product catalog with detailed purchase modals
+- Responsive design optimized for all devices
+- Modern UI with Tailwind CSS and shadcn/ui components
+- TypeScript for type safety and better development experience
 
-## Can I connect a custom domain to my Lovable project?
+## Technologies Used
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- **Frontend Framework:** React 18 with TypeScript
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS
+- **UI Components:** shadcn/ui with Radix UI primitives
+- **Carousel:** Embla Carousel
+- **Icons:** Lucide React

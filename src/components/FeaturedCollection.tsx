@@ -1,4 +1,5 @@
 import ProductCard from "./ProductCard";
+import ChocolateCarousel from "./ChocolateCarousel";
 import productBonbonVanilla from "@/assets/product-bonbon-vanilla.jpg";
 import productTruffles from "@/assets/product-truffles.jpg";
 import productCoffeeBonbon from "@/assets/product-coffee-bonbon.jpg";
@@ -60,6 +61,11 @@ const FeaturedCollection = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Discover our handcrafted selection of premium Belgian chocolates and artisan bonbons
           </p>
+        </div>
+        
+        {/* Chocolate Carousel */}
+        <div className="mb-16">
+          <ChocolateCarousel />
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
