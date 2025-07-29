@@ -9,6 +9,11 @@ export default {
 		"./src/**/*.{ts,tsx}",
 	],
 	prefix: "",
+	safelist: [
+		'delay-200',
+		'delay-500',
+		'animate-pulse'
+	],
 	theme: {
 		container: {
 			center: true,
