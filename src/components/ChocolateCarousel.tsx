@@ -77,24 +77,24 @@ const ChocolateCarousel = () => {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {chocolateImages.map((chocolate) => (
-              <div key={chocolate.id} className="w-full flex-shrink-0 px-2 sm:px-4">
+              <div key={chocolate.id} className="w-full flex-shrink-0 px-4 sm:px-6">
                 <div 
-                  className="relative group cursor-pointer"
+                  className="relative group cursor-pointer active:scale-95 transition-transform duration-200"
                   onClick={() => handleImageClick(chocolate)}
                 >
-                  <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
+                  <div className="aspect-square overflow-hidden rounded-xl bg-gray-100 shadow-md">
                     <img
                       src={chocolate.image}
                       alt={chocolate.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 group-active:scale-110"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-end">
-                    <div className="p-4 text-white">
-                      <h3 className="font-playfair text-lg font-semibold mb-1">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 rounded-xl flex items-end">
+                    <div className="p-3 sm:p-4 text-white w-full">
+                      <h3 className="font-playfair text-sm sm:text-lg font-semibold mb-1 line-clamp-2">
                         {chocolate.title}
                       </h3>
-                      <p className="text-sm text-gray-200">
+                      <p className="text-xs sm:text-sm text-gray-200 line-clamp-2">
                         {chocolate.description}
                       </p>
                     </div>
@@ -133,22 +133,24 @@ const ChocolateCarousel = () => {
         </Button>
         
         {/* Dots indicator */}
-        <div className="flex justify-center mt-4 gap-2">
+        <div className="flex justify-center mt-6 gap-3">
           {chocolateImages.map((_, index) => (
             <button
               key={index}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-amber-800' : 'bg-amber-300'
+              className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full transition-all duration-300 active:scale-125 ${
+                index === currentIndex 
+                  ? 'bg-amber-800 shadow-lg scale-110' 
+                  : 'bg-amber-300 hover:bg-amber-400'
               }`}
               onClick={() => setCurrentIndex(index)}
             />
           ))}
         </div>
         
-        {/* Mobile swipe indicator */}
-        <div className="flex justify-center mt-2 sm:hidden">
-          <div className="text-xs text-muted-foreground">
-            Toca los puntos para navegar
+        {/* Mobile instruction */}
+        <div className="flex justify-center mt-3 sm:hidden">
+          <div className="text-xs text-muted-foreground bg-amber-50 px-3 py-1 rounded-full">
+            👆 Toca los puntos o la imagen para navegar
           </div>
         </div>
       </div>

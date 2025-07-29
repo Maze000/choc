@@ -64,7 +64,7 @@ const FeaturedCollection = () => {
         </div>
         
         {/* Chocolate Carousel */}
-        <div className="mb-16">
+        <div className="mb-16 w-full sm:max-w-2xl sm:mx-auto">
           <ChocolateCarousel />
         </div>
         
