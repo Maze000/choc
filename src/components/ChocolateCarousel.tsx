@@ -155,7 +155,7 @@ const ChocolateCarousel = () => {
       
       {/* Image Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-4xl w-full p-0 bg-transparent border-none">
+        <DialogContent className="w-full max-w-sm sm:max-w-4xl max-h-[90vh] overflow-hidden p-0 bg-transparent border-none mx-2 my-4 sm:m-4">
           {selectedImage && (
             <div className="relative">
               <button
@@ -165,11 +165,11 @@ const ChocolateCarousel = () => {
                 <X className="h-6 w-6" />
               </button>
               <div className="relative bg-white rounded-lg overflow-hidden shadow-2xl">
-                <div className="aspect-square max-h-[80vh]">
+                <div className="aspect-square max-h-[70vh] sm:max-h-[80vh]">
                   <img
                     src={selectedImage.image}
                     alt={selectedImage.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
                 </div>
                 <div className="p-6 bg-gradient-to-t from-black/80 to-transparent absolute bottom-0 left-0 right-0 text-white">

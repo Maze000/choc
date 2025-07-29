@@ -56,7 +56,7 @@ const PurchaseModal = ({ isOpen, onClose, product }: PurchaseModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl w-full max-h-[95vh] overflow-y-auto p-0 bg-white border-none m-2 sm:m-4">
+      <DialogContent className="w-full max-w-sm sm:max-w-2xl max-h-[90vh] sm:max-h-[95vh] overflow-y-auto p-0 bg-white border-none mx-2 my-4 sm:m-4">
         <div className="relative">
           <button
             onClick={onClose}
@@ -71,7 +71,7 @@ const PurchaseModal = ({ isOpen, onClose, product }: PurchaseModalProps) => {
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-48 sm:h-64 md:h-full object-cover"
+                className="w-full h-48 sm:h-64 md:h-full object-cover max-h-64 sm:max-h-none"
               />
               <div className="absolute top-4 left-4 flex flex-col gap-2">
                 {product.isNew && (
@@ -88,7 +88,7 @@ const PurchaseModal = ({ isOpen, onClose, product }: PurchaseModalProps) => {
             </div>
             
             {/* Product Details */}
-            <div className="p-4 sm:p-6 flex flex-col order-2">
+            <div className="p-4 sm:p-6 flex flex-col order-2 min-h-0">
               <div className="flex-1">
                 <h2 className="font-playfair text-lg sm:text-2xl font-bold text-primary mb-3 pr-8">
                   {product.title}
@@ -118,7 +118,7 @@ const PurchaseModal = ({ isOpen, onClose, product }: PurchaseModalProps) => {
                       <SelectTrigger className="w-full h-12 text-base">
                         <SelectValue placeholder="Selecciona el tamaño" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="max-h-60 overflow-y-auto" position="popper" sideOffset={4}>
                         <SelectItem value="small">Pequeño (6 unidades)</SelectItem>
                         <SelectItem value="regular">Regular (12 unidades)</SelectItem>
                         <SelectItem value="large">Grande (24 unidades)</SelectItem>
